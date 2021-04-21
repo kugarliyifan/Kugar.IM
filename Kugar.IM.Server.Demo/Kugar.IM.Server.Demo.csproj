@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kugar.IM.DB\Kugar.IM.DB.csproj" />
+    <ProjectReference Include="..\Kugar.IM.Services\Kugar.IM.Services.csproj" />
+    <ProjectReference Include="..\Kugar.IM.Web\Kugar.IM.Web.csproj" />
+  </ItemGroup>
+
+</Project>

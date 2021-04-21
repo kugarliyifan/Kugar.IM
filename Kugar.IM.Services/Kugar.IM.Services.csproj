@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FreeSql" Version="2.3.200" />
+    <PackageReference Include="Kugar.Core.NetCore" Version="1.2.147" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kugar.IM.DB\Kugar.IM.DB.csproj" />
+  </ItemGroup>
+
+</Project>
