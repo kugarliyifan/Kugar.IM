@@ -44,21 +44,19 @@ namespace Kugar.IM.Server.Demo
 
             services.AddSingleton<IFreeSql>(freesql);
 
-            services.AddCors(options =>
-            {
-                // CorsPolicy 是自訂的 Policy 名稱
-                options.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.WithOrigins("http://localhost:5000")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
-                });
-            });
+            //services.AddCors(options =>
+            //{
+            //    // CorsPolicy 是自訂的 Policy 名稱
+            //    options.AddPolicy("CorsPolicy", policy =>
+            //    {
+            //        policy.WithOrigins("http://localhost:5000")
+            //            .AllowAnyHeader()
+            //            .AllowAnyMethod()
+            //            .AllowCredentials();
+            //    });
+            //});
              
-            services.AddControllers(opt =>
-                {
-                })
+            services.AddControllers()
                 .AddNewtonsoftJson((options) =>
                 {
                     options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
@@ -77,11 +75,11 @@ namespace Kugar.IM.Server.Demo
 
             services.AddIM();
 
-            services.AddSignalR(x =>
-            {
-                x.EnableDetailedErrors = true;
-                x.KeepAliveInterval=TimeSpan.FromMinutes(2);
-            });
+            //services.AddSignalR(x =>
+            //{
+            //    x.EnableDetailedErrors = true;
+            //    x.KeepAliveInterval=TimeSpan.FromMinutes(2);
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

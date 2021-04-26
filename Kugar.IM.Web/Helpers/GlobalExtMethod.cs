@@ -26,7 +26,7 @@ namespace Kugar.IM.Web.Helpers
                 // CorsPolicy 是自訂的 Policy 名稱
                 options.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5000")
+                    policy.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

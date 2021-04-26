@@ -17,21 +17,21 @@ namespace Kugar.IM.Web.Controllers
     }
 
 
-    public class SomeControllerModelConvention : Attribute, IControllerModelConvention
-    {
-        public SomeControllerModelConvention()
-        {
+    //public class SomeControllerModelConvention : Attribute, IControllerModelConvention
+    //{
+    //    public SomeControllerModelConvention()
+    //    {
 
-        }
+    //    }
 
-        public void Apply(ControllerModel model)
-        {
-            var t = (AuthorizeAttribute) model.Attributes.FirstOrDefault(x => x is AuthorizeAttribute);
+    //    public void Apply(ControllerModel model)
+    //    {
+    //        var t = (AuthorizeAttribute) model.Attributes.FirstOrDefault(x => x is AuthorizeAttribute);
 
-            t.AuthenticationSchemes = "im";
+    //        t.AuthenticationSchemes = "im";
 
-            //foreach (var actionModel in model.Actions)
-            //    actionModel.Attributes.Add(new AuthorizeAttribute());
-        }
-    }
+    //        //foreach (var actionModel in model.Actions)
+    //        //    actionModel.Attributes.Add(new AuthorizeAttribute());
+    //    }
+    //}
 }
