@@ -7,6 +7,8 @@ namespace Kugar.IM.DB.DTO
 {
     public class DTO_SessionMessage
     {
+        public long MessageId { set; get; }
+
         /// <summary>
         /// 消息类型
         /// </summary>
@@ -26,6 +28,11 @@ namespace Kugar.IM.DB.DTO
         /// 消息内容类型
         /// </summary>
         public MessageContentTypeEnum ContentType { set; get; }
+
+        /// <summary>
+        /// 是否为当前用户发送的
+        /// </summary>
+        public bool IsMe { set; get; }
 
         /// <summary>
         /// 发送时间

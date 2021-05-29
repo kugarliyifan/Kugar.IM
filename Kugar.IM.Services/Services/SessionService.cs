@@ -199,9 +199,10 @@ namespace Kugar.IM.Services
         public async Task<IPagedList<DTO_UserSession>> GetUserSessions(string userId, int pageIndex = 1,
             int pageSize = 20) 
         {
-            var query = FreeSql.Select<im_chat_session, im_chat_userInSession>()
-                .InnerJoin((x1, x2) => x1.SessionId == x2.SessionId)
-                .Where((x1, x2) => x2.UserId == userId);
+            var query = FreeSql.Select<im_chat_session, im_chat_userInSession,im_chat_message>()
+                .InnerJoin((x1, x2,x3) => x1.SessionId == x2.SessionId)
+                .LeftJoin((x1,x2,x3)=>x1.LastMessageId==x3.MessageId)
+                .Where((x1, x2,x3) => x2.UserId == userId);
 
             var count = await query.CountAsync();
 
@@ -211,11 +212,24 @@ namespace Kugar.IM.Services
             }
 
             var t = await query
-                .OrderBy((x1, x2) => x2.Order)
-                .OrderByDescending((x1, x2) => x1.LastActivityDt)
+                .OrderBy((x1, x2,x3) => x2.Order)
+                .OrderByDescending((x1, x2,x3) => x1.LastActivityDt)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync<DTO_UserSession>();
+                .ToListAsync<DTO_UserSession>((x1, x2, x3) => new DTO_UserSession()
+                {
+                    SessionId = x1.SessionId,
+                    Name = x1.Name,
+                    ContentType = x3==null?null:(int?)x3.ContentType,
+                    LastMessageContent = x3==null?"":x3.Content,
+                    CreateDt = x1.CreateDt,
+                    CreateUserId = x1.CreateUserId,
+                    ExtData = x1.ExtData,
+                    HeaderImageUrl = x1.HeaderImageUrl,
+                    IsPublic = x1.IsPublic,
+                    LastMessageId=x1.LastMessageId,
+                    Type = x1.Type
+                });
 
             if (t.HasData())
             {
@@ -227,9 +241,8 @@ namespace Kugar.IM.Services
                 foreach (var session in t)
                 {
                     session.SessionUserIds = mappingIDs.Where(x => x.SessionId == session.SessionId)
-                        .Select(x => x.UserId).ToList();
+                        .Select(x => x.UserId);
                 }
-
                 //FreeSql.Select<im_chat_userMessageStatus,im_chat_message>()
                 //    .InnerJoin((x1,x2)=>x1.SessionId==x2.SessionId)
                 //    .Where((x1,x2)=>x1.UserId==userId)

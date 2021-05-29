@@ -2,7 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>3ddd19e8-9aaa-4f82-8b4e-8e890d74f6d8</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Kugar.Storage" Version="1.0.2" />
+    <PackageReference Include="Kugar.Storage.Local" Version="1.0.6" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Kugar.IM.DB\Kugar.IM.DB.csproj" />

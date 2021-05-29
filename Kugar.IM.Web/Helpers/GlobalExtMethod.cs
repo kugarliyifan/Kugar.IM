@@ -21,18 +21,6 @@ namespace Kugar.IM.Web.Helpers
         {
             services.Replace(ServiceDescriptor.Singleton<IUserIdProvider, DefaultJWTUserProvider>());
 
-            services.AddCors(options =>
-            {
-                // CorsPolicy 是自訂的 Policy 名稱
-                options.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
-                });
-            });
-
             services.AddScoped<ISessionService,SessionService>();
             services.AddScoped<IMessageService,MessageService>();
 

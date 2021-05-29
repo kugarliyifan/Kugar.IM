@@ -50,7 +50,7 @@ namespace Kugar.IM.Services
         /// <param name="sessionId">会话Id</param>
         /// <param name="lastMessageId">上一次拉取的消息Id,如果为-1,则为从最新开始拉取,如果>0,则为最后一条消息id,并从这条消息开始往前拉取</param>
         /// <returns></returns>
-        Task<IReadOnlyList<DTO_SessionMessage>> GetSessionMessage(long sessionId, long lastMessageId=-1, int takeCount=20);
+        Task<IReadOnlyList<DTO_SessionMessage>> GetSessionMessage(long sessionId,string userId, long lastMessageId=-1, int takeCount=20);
 
         Task<long> GetMessageSessionById(long messageId);
     }
@@ -60,9 +60,9 @@ namespace Kugar.IM.Services
     /// </summary>
     public class MessageService:BaseService, IMessageService
     {
-        private SessionService _sessionService = null;
+        private ISessionService _sessionService = null;
 
-        public MessageService(IFreeSql freeSql,SessionService sessionService) : base(freeSql)
+        public MessageService(IFreeSql freeSql,ISessionService sessionService) : base(freeSql)
         {
             _sessionService = sessionService;
         }
@@ -156,21 +156,45 @@ namespace Kugar.IM.Services
         /// <param name="sessionId">会话Id</param>
         /// <param name="lastMessageId">上一次拉取的消息Id,如果为-1,则为从最新开始拉取,如果>0,则为最后一条消息id,并从这条消息开始往前拉取</param>
         /// <returns></returns>
-        public async Task<IReadOnlyList<DTO_SessionMessage>> GetSessionMessage(long sessionId, long lastMessageId=-1, int takeCount=20)
+        public async Task<IReadOnlyList<DTO_SessionMessage>> GetSessionMessage(long sessionId,string userId, long lastMessageId=-1, int takeCount=20)
         {
-            return await FreeSql.Select<im_chat_message>().Where(x => x.SessionId == sessionId && x.State==0)
-                .WhereIf(lastMessageId > 0, x => x.MessageId < lastMessageId)
-                .OrderByDescending(x => x.MessageId)
-                .Take(takeCount)
-                .ToListAsync(x => new DTO_SessionMessage()
-                {
-                    Content =x.State==99?"已撤回的消息":x.Content,
-                    ContentType = x.ContentType,
-                    SendDt = x.SendDt,
-                    SendUserId = x.SenderId,
-                    MessageType = x.Type,
-                    State = x.State
-                });
+            if (sessionId==-1 && userId!="")
+            {
+                return await FreeSql.Select<im_chat_userInSession, im_chat_message,im_chat_session>()
+                    .InnerJoin((s, m,se) => s.SessionId == m.SessionId)
+                    .Where((s, m,se) => s.UserId == userId )
+                    .Where((s, m,se) => m.MessageId > lastMessageId && m.State==0)
+                    .OrderBy((s, m,se) => m.MessageId)
+                    .Take(takeCount)
+                    .ToListAsync((s, m,se) => new DTO_SessionMessage()
+                    {
+                        Content = m.State == 99 ? "已撤回的消息" : m.Content,
+                        ContentType = m.ContentType,
+                        SendDt = m.SendDt,
+                        SendUserId = m.SenderId,
+                        MessageType = m.Type,
+                        State = m.State
+                    });
+
+            }
+            else
+            {
+                return await FreeSql.Select<im_chat_message>()
+                    .Where(x => x.SessionId == sessionId && x.State==0)
+                    .WhereIf(lastMessageId > 0, x => x.MessageId > lastMessageId)
+                    .OrderBy(x => x.MessageId)
+                    .Take(takeCount)
+                    .ToListAsync(x => new DTO_SessionMessage()
+                    {
+                        Content =x.State==99?"已撤回的消息":x.Content,
+                        ContentType = x.ContentType,
+                        SendDt = x.SendDt,
+                        SendUserId = x.SenderId,
+                        MessageType = x.Type,
+                        State = x.State
+                    });
+            }
+            
         }
 
         public async Task<long> GetMessageSessionById(long messageId)

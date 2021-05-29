@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Kugar.Core.BaseStruct;
 using Kugar.Core.ExtMethod;
@@ -8,12 +9,16 @@ using Kugar.IM.DB.DTO;
 using Kugar.IM.Server.Areas.IM.Views.Session;
 using Kugar.IM.Services;
 using Kugar.IM.Web.Hub;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Kugar.IM.Web.Controllers
 {
+    /// <summary>
+    /// 会话管理
+    /// </summary>
     public class SessionController : IMBaseController
     {
         /// <summary>
@@ -31,6 +36,23 @@ namespace Kugar.IM.Web.Controllers
         {
             var lst = await session.GetUserSessions(CurrentUserId, pageIndex, pageSize);
 
+            if (lst.HasData())
+            {
+                
+                var sessionUnRead = await session.GetUserSessionUnReadCount(CurrentUserId);
+
+                foreach (var item in sessionUnRead)
+                {
+                    var s = lst.GetData().FirstOrDefault(x => x.SessionId == item.SessionId);
+
+                    if (s!=null)
+                    {
+                        s.unreadCount = item.UnReadCount;
+                    }
+                    
+                }
+            }
+
             return this.Json<View_GetSessions>(lst);
 
             //return new SuccessResultReturn<IPagedList<DTO_UserSession>>(lst);
@@ -40,7 +62,7 @@ namespace Kugar.IM.Web.Controllers
         /// 创建一个一对一的会话
         /// </summary>
         /// <param name="session"></param>
-        /// <param name="toUserId"></param>
+        /// <param name="toUserId">接收者用户Id</param>
         /// <returns></returns>
         [FromBodyJson, HttpPost]
         public async Task<ResultReturn<long>> CreateOneToOneSession(
@@ -109,6 +131,11 @@ namespace Kugar.IM.Web.Controllers
             return ret;
         }
 
+        /// <summary>
+        /// 获取用户所有会话的未读数量列表
+        /// </summary>
+        /// <param name="session">会话Id</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ResultReturn<IReadOnlyList<DTO_UserSessionUnReadCount>>> GetUnReadCount([FromServices] ISessionService session)
         {

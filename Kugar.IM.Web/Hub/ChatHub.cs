@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Kugar.Core.BaseStruct;
 using Kugar.Core.ExtMethod;
 using Kugar.IM.DB.Enums;
 using Kugar.IM.Services;
@@ -12,55 +13,58 @@ using Microsoft.Extensions.Caching.Memory;
 namespace Kugar.IM.Web.Hub
 {
     [Authorize(AuthenticationSchemes = "im"),]
-    public class ChatHub:Microsoft.AspNetCore.SignalR.Hub
+    public class ChatHub : Microsoft.AspNetCore.SignalR.Hub
     {
         private ISessionService _session;
         private IIMConnectionManager _connManager;
         private IMessageService _message;
 
-        public ChatHub( ISessionService session,IMessageService message, IIMConnectionManager connManager)
+        public ChatHub(ISessionService session, IMessageService message, IIMConnectionManager connManager)
         {
             _session = session;
             _connManager = connManager;
             _message = message;
         }
 
-        public async Task SendMessage(
-            //[FromServices]MessageService message, 
-            //[FromServices]SessionService session,
-            //[FromServices]IMemoryCache cache,
-            long sessionId,
-            string content,
-            int contentType
-            )
+        [Authorize(AuthenticationSchemes = "im"),]
+        public async Task<ResultReturn> SendMessage(
+                //[FromServices]MessageService message, 
+                //[FromServices]SessionService session,
+                //[FromServices]IMemoryCache cache,
+                long sessionId,
+                string content,
+                int contentType
+                )
         {
-            await _message.AddMessage(Context.UserIdentifier, sessionId, content, MessageTypeEnum.User,
-                (MessageContentTypeEnum) contentType);
+            var messageId=await _message.AddMessage(Context.UserIdentifier, sessionId, content, MessageTypeEnum.User,
+                (MessageContentTypeEnum)contentType);
 
             var sessionInfo = await _session.GetSessionById(sessionId);
 
-            if (sessionInfo.Type== SessionTypeEnum.OneToOne)
+            if (sessionInfo.Type == SessionTypeEnum.OneToOne)
             {
-                var s =await _session.GetSessionUserIds(sessionId);
+                var s = await _session.GetSessionUserIds(sessionId);
 
                 var friendUserId = s.FirstOrDefault(x => x != Context.UserIdentifier);
 
-                if (await  _connManager.IsUserOnline(friendUserId))
+                if (await _connManager.IsUserOnline(friendUserId))
                 {
-                    await Clients.User(friendUserId).SendAsync("ReceivedMessage", content);
+                    await Clients.User(friendUserId).SendAsync("ReceivedMessage", sessionId, content, contentType,messageId);
                 }
-                
+
             }
-            else if(sessionInfo.Type== SessionTypeEnum.Group)
+            else if (sessionInfo.Type == SessionTypeEnum.Group)
             {
                 await Clients.Group(sessionInfo.SessionId.ToStringEx()).SendAsync("SendMessage", content);
             }
-            
+
+            return new SuccessResultReturn(messageId);
         }
 
-        public  override async Task OnConnectedAsync()
+        [Authorize(AuthenticationSchemes = "im"),]
+        public override async Task OnConnectedAsync()
         {
-            var groupIds =await _session.GetUserGroupIDs(Context.UserIdentifier);
+            var groupIds = await _session.GetUserGroupIDs(Context.UserIdentifier);
 
             foreach (var groupId in groupIds)
             {
@@ -70,26 +74,29 @@ namespace Kugar.IM.Web.Hub
             await _connManager.AddUserConnectionId(Context.UserIdentifier, Context.ConnectionId);
 
             await base.OnConnectedAsync();
-        } 
+        }
+
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
+        [Authorize(AuthenticationSchemes = "im"),]
         public async Task OnKeepAlive()
         {
             await _connManager.ActivityUser(Context.UserIdentifier);
-            
+
         }
-        
+
         /// <summary>
         /// 离线后触发
         /// </summary>
         /// <param name="exception"></param>
         /// <returns></returns>
+        [Authorize(AuthenticationSchemes = "im"),]
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            var groupIds =await _session.GetUserGroupIDs(Context.UserIdentifier);
+            var groupIds = await _session.GetUserGroupIDs(Context.UserIdentifier);
 
             foreach (var groupId in groupIds)
             {
@@ -97,9 +104,9 @@ namespace Kugar.IM.Web.Hub
             }
 
             await _connManager.RemoveUserConnectionId(Context.UserIdentifier, Context.ConnectionId);
-        
+
             await base.OnDisconnectedAsync(exception);
         }
-        
+
     }
 }

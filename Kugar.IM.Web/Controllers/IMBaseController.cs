@@ -11,6 +11,9 @@ namespace Kugar.IM.Web.Controllers
     [Area("im")]
     [Authorize(AuthenticationSchemes = "im")]
     [FromBodyJson/*,conve(typeof(SomeControllerModelConvention))*/ ]
+    [ApiExplorerSettings(GroupName = "im")]
+    [Route("im/[controller]/[action]")]
+    [Produces("application/json")]
     public class IMBaseController : ControllerBase
     {
         protected string CurrentUserId => this.User.FindFirstValue(ClaimTypes.NameIdentifier);

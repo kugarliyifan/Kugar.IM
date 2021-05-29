@@ -22,8 +22,14 @@ namespace Kugar.IM.Server.Areas.IM.Views.Session
                     x => x.Name,
                     x => x.LastMessageId, 
                     x => x.LastActivityDt, 
-                    x => x.SessionUserIds, 
-                    x => x.Type);
+                    //x => x.SessionUserIds, 
+                    x => x.Type,
+                    x=>x.LastMessageContent,
+                    x=>x.ContentType,
+                    x=>x.unreadCount)
+                    .AddArrayValue(x=>x.SessionUserIds)
+                    //.AddArrayValue("SessionUserIds",x=>x.Model.SessionUserIds)
+                    ;
             }
         }
     }
