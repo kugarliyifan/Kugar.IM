@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kugar.IM.Services</name>
+    </assembly>
+    <members>
+        <member name="M:Kugar.IM.Services.IMessageService.AddMessage(System.String,System.Int64,System.String,Kugar.IM.DB.Enums.MessageTypeEnum,Kugar.IM.DB.Enums.MessageContentTypeEnum)">
+            <summary>
+            添加一条信息
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toSessionId"></param>
+            <param name="content"></param>
+            <param name="type"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.IMessageService.RevocationMessage(System.Int64)">
+            <summary>
+            撤回信息
+            </summary>
+            <param name="messageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.IMessageService.SetMessageReadState(System.String,System.Int64,System.Int64)">
+            <summary>
+            设置会话的阅读时间
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <param name="lastMessageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.IMessageService.GetSessionMessage(System.Int64,System.String,System.Int64,System.Int32)">
+            <summary>
+            拉取历史记录
+            </summary>
+            <param name="sessionId">会话Id</param>
+            <param name="lastMessageId">上一次拉取的消息Id,如果为-1,则为从最新开始拉取,如果>0,则为最后一条消息id,并从这条消息开始往前拉取</param>
+            <returns></returns>
+        </member>
+        <member name="T:Kugar.IM.Services.MessageService">
+            <summary>
+            消息服务
+            </summary>
+        </member>
+        <member name="M:Kugar.IM.Services.MessageService.AddMessage(System.String,System.Int64,System.String,Kugar.IM.DB.Enums.MessageTypeEnum,Kugar.IM.DB.Enums.MessageContentTypeEnum)">
+            <summary>
+            添加一条信息
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toSessionId"></param>
+            <param name="content"></param>
+            <param name="type"></param>
+            <param name="contentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.MessageService.RevocationMessage(System.Int64)">
+            <summary>
+            撤回信息
+            </summary>
+            <param name="messageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.MessageService.SetMessageReadState(System.String,System.Int64,System.Int64)">
+            <summary>
+            设置会话的阅读时间
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <param name="lastMessageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.MessageService.GetSessionMessage(System.Int64,System.String,System.Int64,System.Int32)">
+            <summary>
+            拉取历史记录
+            </summary>
+            <param name="sessionId">会话Id</param>
+            <param name="lastMessageId">上一次拉取的消息Id,如果为-1,则为从最新开始拉取,如果>0,则为最后一条消息id,并从这条消息开始往前拉取</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.CreateOneToOneSession(System.String,System.String)">
+            <summary>
+            创建一个一对一的私聊会话
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.CreateGroupSession(System.String,System.String[])">
+            <summary>
+            创建一个群聊会话
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetUserSessions(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取用户相关连的会话列表
+            </summary>
+            <param name="userId"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetUserSessionUnReadCount(System.String)">
+            <summary>
+            获取用户的所有未读数量
+            </summary>
+            <param name="userId">用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.JoinToSession(System.String,System.Int64)">
+            <summary>
+            指定用户Id加入session会话中
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetToUseIdSessionIdByFromUseId(System.String,System.String)">
+            <summary>
+            获取两个用户的私聊会话id
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetSessionUserIds(System.Int64)">
+            <summary>
+            获取指定会话的用户Id列表
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetSessionById(System.Int64)">
+            <summary>
+            获取指定Id会话信息
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetUserGroupIDs(System.String)">
+            <summary>
+            获取指定用户的群组Id
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.GetSessionInfoById(System.Int64)">
+            <summary>
+            获取包含用户Id列表的群组信息
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.ISessionService.IsUserExistsInSession(System.Int64,System.String)">
+            <summary>
+            判断指定用户是否在指定会话中
+            </summary>
+            <param name="sessionId"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.CreateOneToOneSession(System.String,System.String)">
+            <summary>
+            创建一个一对一的私聊会话
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.CreateGroupSession(System.String,System.String[])">
+            <summary>
+            创建一个群聊会话
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetUserSessions(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取用户相关连的会话列表
+            </summary>
+            <param name="userId"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetUserSessionUnReadCount(System.String)">
+            <summary>
+            获取用户的所有未读数量
+            </summary>
+            <param name="userId">用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.JoinToSession(System.String,System.Int64)">
+            <summary>
+            指定用户Id加入session会话中
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetToUseIdSessionIdByFromUseId(System.String,System.String)">
+            <summary>
+            获取两个用户的私聊会话id
+            </summary>
+            <param name="fromUserId"></param>
+            <param name="toUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetSessionUserIds(System.Int64)">
+            <summary>
+            获取指定会话的用户Id列表
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetSessionById(System.Int64)">
+            <summary>
+            获取指定Id会话信息
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetUserGroupIDs(System.String)">
+            <summary>
+            获取指定用户的群组Id
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.GetSessionInfoById(System.Int64)">
+            <summary>
+            获取包含用户Id列表的群组信息
+            </summary>
+            <param name="sessionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Services.SessionService.IsUserExistsInSession(System.Int64,System.String)">
+            <summary>
+            判断指定用户是否在指定会话中
+            </summary>
+            <param name="sessionId"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

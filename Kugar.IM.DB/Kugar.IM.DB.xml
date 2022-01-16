@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kugar.IM.DB</name>
+    </assembly>
+    <members>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.MessageType">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.SendUserId">
+            <summary>
+            发送方用户Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.Content">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.ContentType">
+            <summary>
+            消息内容类型
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.IsMe">
+            <summary>
+            是否为当前用户发送的
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.SendDt">
+            <summary>
+            发送时间
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.DTO.DTO_SessionMessage.State">
+            <summary>
+            消息状态 0=显示 1=已撤回
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Entities.im_chat_message">
+            <summary>
+            消息表
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.MessageId">
+            <summary>
+            消息id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.Type">
+            <summary>
+            消息类型  0=系统消息  1=用户消息
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.SessionId">
+            <summary>
+            会话Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.Content">
+            <summary>
+            消息内容,json格式,如果ContentType=0 则直接为文本内容
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.ContentType">
+            <summary>
+            消息类型   0=文本  1=图片 2=语音 3=小视频
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.SendDt">
+            <summary>
+            发送时间
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.SenderId">
+            <summary>
+            发送人Id,如果type=0 则为空
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_message.State">
+            <summary>
+            状态 0=正常 99=撤回
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Entities.im_chat_session">
+            <summary>
+            聊天会话
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.Name">
+            <summary>
+            会话名称
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.HeaderImageUrl">
+            <summary>
+            会话头像图片
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.Type">
+            <summary>
+            会话类型  0=个人会话 1=群组会话 2=系统会话
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.IsPublic">
+            <summary>
+            是否为公开会话
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.CreateUserId">
+            <summary>
+            创建者Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.CreateDt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.LastActivityDt">
+            <summary>
+            最后一次消息时间
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.LastMessageId">
+            <summary>
+            最后一条消息Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_session.ExtData">
+            <summary>
+            扩展信息
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Entities.im_chat_userMessageStatus">
+            <summary>
+            用户消息已读状态
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userMessageStatus.LastReadMessageId">
+            <summary>
+            该会话中,最后一次读取的消息ID
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Entities.im_chat_userInSession">
+            <summary>
+            聊天会话用户关联表
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userInSession.SessionId">
+            <summary>
+            会话Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userInSession.UserId">
+            <summary>
+            会员Id
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userInSession.Order">
+            <summary>
+            会话顺序,数字越小,越靠前
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userInSession.JoinDt">
+            <summary>
+            加入会话时间
+            </summary>
+        </member>
+        <member name="P:Kugar.IM.DB.Entities.im_chat_userInSession.QuitDt">
+            <summary>
+            退出会话时间
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Enums.SessionTypeEnum">
+            <summary>
+            会话类型枚举
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.SessionTypeEnum.OneToOne">
+            <summary>
+            个人私聊
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.SessionTypeEnum.Group">
+            <summary>
+            群组
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.SessionTypeEnum.System">
+            <summary>
+            系统会话
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Enums.MessageTypeEnum">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageTypeEnum.System">
+            <summary>
+            系统消息,系统消息无发送人
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageTypeEnum.User">
+            <summary>
+            用户消息
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.DB.Enums.MessageContentTypeEnum">
+            <summary>
+            消息内容类型
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageContentTypeEnum.Text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageContentTypeEnum.Image">
+            <summary>
+            图片
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageContentTypeEnum.Voice">
+            <summary>
+            语音
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageContentTypeEnum.Video">
+            <summary>
+            小视频
+            </summary>
+        </member>
+        <member name="F:Kugar.IM.DB.Enums.MessageContentTypeEnum.Emoticon">
+            <summary>
+            表情
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FreeSql;
 using Kugar.Core.BaseStruct;
+using Kugar.Core.ExtMethod;
 using Kugar.IM.DB.DTO;
 using Kugar.IM.DB.Entities;
 using Kugar.IM.DB.Enums;
@@ -203,5 +204,9 @@ namespace Kugar.IM.Services
                 .ToOneAsync(x => x.SessionId);
             ;
         }
+
+
+
+        public ISessionService Session { get; set; }
     }
 }

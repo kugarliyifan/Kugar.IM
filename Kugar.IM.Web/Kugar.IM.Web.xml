@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kugar.IM.Web</name>
+    </assembly>
+    <members>
+        <member name="T:Kugar.IM.Web.Cache.DefaultMemoryUserConnectManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Kugar.IM.Web.Controllers.MessageController">
+            <summary>
+            消息管理
+            </summary>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.MessageController.SetMessageReadState(System.Int64,Kugar.IM.Services.IMessageService,Kugar.IM.Services.ISessionService)">
+            <summary>
+            设置消息已读状态
+            </summary>
+            <param name="messageId">消息ID</param>
+            <param name="message"></param>
+            <param name="session"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.MessageController.GetMessages(Kugar.IM.Services.IMessageService,Kugar.IM.Services.ISessionService,System.Int64,System.Int64)">
+            <summary>
+            获取历史消息
+            </summary>
+            <param name="message"></param>
+            <param name="session"></param>
+            <param name="sessionId">会话id,如果需要拉取当前用户的所有消息,则为-1</param>
+            <param name="lastMessageId">最后一条消息id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Kugar.IM.Web.Controllers.SessionController">
+            <summary>
+            会话管理
+            </summary>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.SessionController.GetSessions(Kugar.IM.Services.ISessionService,System.Int32,System.Int32)">
+            <summary>
+            获取当前用户的所有会话
+            </summary>
+            <param name="session"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.SessionController.CreateOneToOneSession(Kugar.IM.Services.ISessionService,System.String)">
+            <summary>
+            创建一个一对一的会话
+            </summary>
+            <param name="session"></param>
+            <param name="toUserId">接收者用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.SessionController.CreateGroupSession(Microsoft.AspNetCore.SignalR.HubCallerContext,Microsoft.AspNetCore.SignalR.IHubContext{Kugar.IM.Web.Hub.ChatHub},Microsoft.Extensions.Caching.Memory.IMemoryCache,Kugar.IM.Services.ISessionService,System.String[])">
+            <summary>
+            创建一个群组会话,并拉指定人员入群
+            </summary>
+            <param name="callContext"></param>
+            <param name="hubContext"></param>
+            <param name="session"></param>
+            <param name="toUserIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.SessionController.JoinToSession(Microsoft.AspNetCore.SignalR.HubCallerContext,Microsoft.AspNetCore.SignalR.IHubContext{Kugar.IM.Web.Hub.ChatHub},Kugar.IM.Services.ISessionService,System.Int64)">
+            <summary>
+            加入一个会话
+            </summary>
+            <param name="callContext"></param>
+            <param name="hubContext"></param>
+            <param name="session"></param>
+            <param name="sessionId">会话ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.SessionController.GetUnReadCount(Kugar.IM.Services.ISessionService)">
+            <summary>
+            获取用户所有会话的未读数量列表
+            </summary>
+            <param name="session">会话Id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Kugar.IM.Web.Controllers.FileIOController">
+            <summary>
+            媒体文件
+            </summary>
+        </member>
+        <member name="M:Kugar.IM.Web.Controllers.FileIOController.Upload(Kugar.Storage.IStorage)">
+            <summary>
+            上传媒体文件,使用标准form post方式, 包含contentType 和 file 文件流字段 图片/音频不能超过2m
+            </summary>
+            <param name="storge"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Helpers.IMGlobalExtMethod.SyncIMDbStruct(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            同步IM服务所需的数据库结构到数据库中
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Hub.ChatHub.OnKeepAlive">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Kugar.IM.Web.Hub.ChatHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            离线后触发
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

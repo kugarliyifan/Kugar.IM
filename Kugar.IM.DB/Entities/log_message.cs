@@ -146,7 +146,7 @@ namespace Kugar.IM.DB.Entities
     /// <summary>
     /// 聊天会话用户关联表
     /// </summary>
-    public class im_chat_userInSession
+    public class im_chat_userInSession 
     {
         /// <summary>
         /// 会话Id

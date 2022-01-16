@@ -1,0 +1,234 @@
+﻿{
+  "Env": [
+    {
+      "Name": "正式版",
+      "ServerList": [
+        {
+          "Token": "erwwerwrwerwerwerwer",
+          "Host": "111.231.103.8:7000",
+          "NickName": "腾讯云正式",
+          "IIsFireUrl": "",
+          "DockerFireUrl": null,
+          "WindowsServiceFireUrl": null,
+          "LinuxServiceFireUrl": null
+        }
+      ],
+      "LinuxServerList": [],
+      "IgnoreList": [
+        "/uploads?.+",
+        "/logs?.+",
+        "^/Web.config",
+        "^/appsettings.json"
+      ],
+      "WindowsBackUpIgnoreList": [
+        "/runtimes?.+",
+        "/uploads?.+",
+        "/logs?.+"
+      ]
+    },
+    {
+      "Name": "拼她",
+      "ServerList": [
+        {
+          "Token": "erwwerwrwerwerwerwer",
+          "Host": "111.231.103.8:7000",
+          "NickName": "拼她",
+          "IIsFireUrl": "",
+          "DockerFireUrl": null,
+          "WindowsServiceFireUrl": null,
+          "LinuxServiceFireUrl": null
+        }
+      ],
+      "LinuxServerList": [],
+      "IgnoreList": [
+        "/uploads?.+",
+        "/logs?.+",
+        "^/Web.config",
+        "^/appsettings.json"
+      ],
+      "WindowsBackUpIgnoreList": [
+        "/runtimes?.+",
+        "/uploads?.+",
+        "/logs?.+"
+      ]
+    },
+    {
+      "Name": "折折乐测试",
+      "ServerList": [
+        {
+          "Token": "erwwerwrwerwerwerwer",
+          "Host": "zzltest2.stntian.com:7000",
+          "NickName": "测试",
+          "IIsFireUrl": "",
+          "DockerFireUrl": null,
+          "WindowsServiceFireUrl": null,
+          "LinuxServiceFireUrl": null
+        }
+      ],
+      "LinuxServerList": [],
+      "IgnoreList": [
+        "/uploads?.+",
+        "/logs?.+",
+        "^/Web.config",
+        "^/appsettings.json"
+      ],
+      "WindowsBackUpIgnoreList": [
+        "/runtimes?.+",
+        "/uploads?.+",
+        "/logs?.+"
+      ]
+    },
+    {
+      "Name": "潮汕节料",
+      "ServerList": [
+        {
+          "Token": "erwwerwrwerwerwerwer",
+          "Host": "111.231.103.8:7000",
+          "NickName": "腾讯云正式",
+          "IIsFireUrl": "",
+          "DockerFireUrl": null,
+          "WindowsServiceFireUrl": null,
+          "LinuxServiceFireUrl": null
+        }
+      ],
+      "LinuxServerList": [],
+      "IgnoreList": [
+        "/uploads?.+",
+        "/logs?.+",
+        "^/Web.config",
+        "^/appsettings.json"
+      ],
+      "WindowsBackUpIgnoreList": [
+        "/runtimes?.+",
+        "/uploads?.+",
+        "/logs?.+"
+      ]
+    }
+  ],
+  "IIsConfig": {
+    "SdkType": "netcore",
+    "WebSiteName": "TeaCircleIM",
+    "LastEnvName": "正式版",
+    "EnvPairList": [
+      {
+        "EnvName": "正式版",
+        "ConfigName": "TeaCircleIM",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "拼她",
+        "ConfigName": "拼她",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "折折乐测试",
+        "ConfigName": "ZZLTest",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "潮汕节料",
+        "ConfigName": "潮汕节料",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      }
+    ]
+  },
+  "WindowsServiveConfig": {
+    "ServiceName": "",
+    "SdkType": null,
+    "LastEnvName": null,
+    "EnvPairList": [
+      {
+        "EnvName": "正式版",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "拼她",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "折折乐测试",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      },
+      {
+        "EnvName": "潮汕节料",
+        "ConfigName": "",
+        "LinuxEnvParam": null,
+        "DockerPort": null,
+        "DockerEnvName": null,
+        "DockerVolume": null,
+        "DockerOther": null
+      }
+    ]
+  },
+  "LinuxServiveConfig": {
+    "ServiceName": "",
+    "EnvParam": "",
+    "LastEnvName": null,
+    "EnvPairList": []
+  },
+  "DockerConfig": {
+    "Prot": "",
+    "AspNetCoreEnv": "",
+    "LastEnvName": null,
+    "RemoveDaysFromPublished": "10",
+    "Volume": "",
+    "Other": "",
+    "EnvPairList": []
+  },
+  "DockerImageConfig": {
+    "BaseHttpProxy": "",
+    "BaseImage": "",
+    "BaseImageCredential": {
+      "UserName": "",
+      "Password": ""
+    },
+    "TargetImage": "",
+    "TargetHttpProxy": "",
+    "TargetTags": [
+      ""
+    ],
+    "TargetImageCredential": {
+      "UserName": "",
+      "Password": ""
+    },
+    "ImageFormat": "Docker",
+    "Entrypoint": [
+      ""
+    ],
+    "Cmd": [
+      ""
+    ],
+    "IgnoreList": []
+  }
+}
